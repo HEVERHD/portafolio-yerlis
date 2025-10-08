@@ -93,7 +93,7 @@ function About() {
             <p style={{ textAlign: "center", marginTop: "30px" }}>
               👉 Mira todos mis proyectos en{" "}
               <a
-                href="https://github.com/yerlisdimas?tab=repositories"
+                href="https://github.com/Yerlis24"
                 target="_blank"
                 rel="noreferrer"
                 className="purple"

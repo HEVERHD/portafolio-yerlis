@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import { DiPython, DiGit } from "react-icons/di";
-import { SiPostman, SiSelenium, SiJira, SiAndroidstudio, SiMysql } from "react-icons/si";
+import { SiSelenium, SiMysql, SiJira, SiAndroidstudio } from "react-icons/si";
 
 function Techstack() {
   return (
@@ -12,10 +12,6 @@ function Techstack() {
 
       <Col xs={4} md={2} className="tech-icons">
         <SiSelenium title="Selenium WebDriver" />
-      </Col>
-
-      <Col xs={4} md={2} className="tech-icons">
-        <SiPostman title="Postman" />
       </Col>
 
       <Col xs={4} md={2} className="tech-icons">
