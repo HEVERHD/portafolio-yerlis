@@ -6,8 +6,10 @@ import emotion from "../../Assets/Projects/emotion.png";
 import editor from "../../Assets/Projects/codeEditor.png";
 import chatify from "../../Assets/Projects/chatify.png";
 import suicide from "../../Assets/Projects/suicide.png";
-import bitsOfCode from "../../Assets/Projects/blog.png";
+import bitsOfCode from "../../Assets/Projects/grouser.PNG";
 import urbanRoutesVideo from "../../Assets/videos/URBANROUTESYERLIS.mp4";
+import urbangrocer from "../../Assets/videos/urbangrocer.mp4";
+
 
 function Projects() {
   return (
@@ -42,8 +44,8 @@ function Projects() {
               title="Urban Grocer – Pruebas de API (Postman)"
               description="Proyecto QA centrado en pruebas de API REST. Diseñé y ejecuté una colección en Postman con suites de smoke y regresión, validando endpoints CRUD, códigos 2xx/4xx/5xx, esquemas JSON (tests), variables de entorno, auth y casos negativos. Además, documenté hallazgos y evidencias en la plantilla del proyecto."
               // ghLink="" // (opcional) si tienes repo con la colección .json
-              demoLink="https://tus-evidencias-o-video.com" // coloca aquí tu video/Docs/Postman Workspace público
-              demoInModal // si usas mi ProjectCard con modal, abre la demo dentro del portafolio
+              demoLink={urbangrocer}
+              demoInModal
             />
           </Col>
 
