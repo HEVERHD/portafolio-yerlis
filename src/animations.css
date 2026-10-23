@@ -1,0 +1,340 @@
+/* ---------- Animaciones ----------
+   Todas se desactivan con prefers-reduced-motion (ver final del archivo
+   y la regla global en styles.css). */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pop {
+  from {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+}
+@keyframes scan {
+  0%,
+  55% {
+    background-position: 0 -120%;
+  }
+  85%,
+  100% {
+    background-position: 0 220%;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 45%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+
+/* Entrada del hero, escalonada con --d */
+.intro {
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--d, 0) * 110ms + 80ms);
+}
+.status-dot {
+  animation: pulse 2s ease-out infinite;
+}
+
+/* Subrayado de "error" que se corrige: ondulado rojo → línea verde */
+.bug-word {
+  position: relative;
+  white-space: nowrap;
+}
+.bug-word::before,
+.bug-word::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.bug-word::before {
+  bottom: -0.08em;
+  height: 0.18em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'%3E%3Cpath d='M0 6 Q4 0 8 4 T16 2' fill='none' stroke='%23e5484d' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x left center / auto 100%;
+  clip-path: inset(0 100% 0 0);
+  animation: squiggle-in 0.6s 0.9s ease-out forwards, squiggle-out 0.4s 2.4s ease-in forwards;
+}
+.bug-word::after {
+  bottom: 0;
+  height: 0.09em;
+  border-radius: 1em;
+  background: var(--ok);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: fix-line 0.6s 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+@keyframes squiggle-in {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes squiggle-out {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes fix-line {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Cursor de terminal en las etiquetas de sección */
+.section-label::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 6px;
+  vertical-align: -0.18em;
+  background: currentColor;
+  opacity: 0.7;
+  animation: blink 1.1s steps(1) infinite;
+}
+
+/* Barra de progreso de lectura bajo el header */
+.progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--ok));
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+}
+
+/* Aparición al hacer scroll */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.25s, box-shadow 0.25s;
+  transition-delay: calc(var(--d, 0) * 90ms), calc(var(--d, 0) * 90ms), 0s, 0s;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Etiquetas que entran una a una dentro de cada tarjeta */
+.skill-card .tags li {
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.4s, transform 0.4s, border-color 0.2s, color 0.2s, background-color 0.2s;
+  transition-delay: calc(var(--d, 0) * 90ms + var(--j, 0) * 45ms + 250ms);
+}
+.skill-card.is-visible .tags li {
+  opacity: 1;
+  transform: none;
+}
+.skill-card .tags li:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  transition-delay: 0s;
+}
+
+.skill-card:hover,
+.mini-project:hover,
+.strengths li:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: var(--shadow-lg);
+}
+
+/* Proyectos: cada punto "pasa" como un test, en secuencia */
+.project-work li::before {
+  background-color: var(--bg-alt);
+  background-size: 0;
+  box-shadow: inset 0 0 0 1.5px var(--line);
+  transition: background-color 0.3s, background-size 0.35s cubic-bezier(0.3, 1.6, 0.5, 1), box-shadow 0.3s;
+  transition-delay: calc(var(--j, 0) * 380ms + 500ms);
+}
+.project.is-visible .project-work li::before {
+  background-color: var(--ok-soft);
+  background-size: 11px;
+  box-shadow: inset 0 0 0 1.5px transparent;
+}
+
+/* Al pasar sobre la captura: retícula de inspección + línea de escaneo */
+.inspect {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background-image: linear-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  transition: opacity 0.3s;
+}
+.inspect::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: var(--ok);
+  box-shadow: 0 0 14px 2px color-mix(in srgb, var(--ok) 60%, transparent);
+}
+.project-media:hover .inspect,
+.project-media:focus-visible .inspect {
+  opacity: 1;
+}
+.project-media:hover .inspect::after,
+.project-media:focus-visible .inspect::after {
+  animation: sweep 1.6s ease-in-out infinite;
+}
+@keyframes sweep {
+  50% {
+    top: calc(100% - 2px);
+  }
+}
+
+/* Trayectoria: la línea se dibuja al aparecer */
+.timeline li {
+  position: relative;
+  border-top-color: transparent;
+}
+.timeline li::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--d, 0) * 90ms + 150ms);
+}
+.timeline li.is-visible::before {
+  transform: scaleX(1);
+}
+
+/* Bug que cruza la pantalla */
+.bughunt {
+  --bug-line: var(--bg);
+}
+.bug {
+  position: fixed;
+  z-index: 60;
+  top: var(--y, 50vh);
+  left: 0;
+  padding: 8px;
+  color: var(--ink);
+  opacity: 0.85;
+  animation: crawl 14s linear forwards;
+}
+.bug:hover {
+  color: #e5484d;
+  opacity: 1;
+}
+.bug .l1,
+.bug .l2 {
+  transform-origin: 16px 17px;
+  animation: legs 0.25s ease-in-out infinite alternate;
+}
+.bug .l2 {
+  animation-direction: alternate-reverse;
+}
+@keyframes legs {
+  to {
+    transform: rotate(9deg);
+  }
+}
+@keyframes crawl {
+  0% {
+    transform: translate(-60px, 0) rotate(90deg);
+  }
+  30% {
+    transform: translate(32vw, -40px) rotate(70deg);
+  }
+  45% {
+    transform: translate(46vw, -20px) rotate(120deg);
+  }
+  70% {
+    transform: translate(70vw, 30px) rotate(95deg);
+  }
+  100% {
+    transform: translate(calc(100vw + 60px), 0) rotate(85deg);
+  }
+}
+.bug-toast {
+  position: fixed;
+  z-index: 70;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 340px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  font-size: 14px;
+  color: var(--ink-2);
+  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.bug-toast .pill {
+  flex: none;
+  margin-top: 2px;
+}
+.bug-toast b {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink);
+}
+@media (max-width: 640px) {
+  .bug-toast {
+    left: 16px;
+    right: 16px;
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .skill-card .tags li {
+    opacity: 1;
+    transform: none;
+  }
+  .bug-word::before {
+    display: none;
+  }
+  .bug-word::after {
+    transform: none;
+  }
+  .scan,
+  .section-label::after {
+    display: none;
+  }
+}
