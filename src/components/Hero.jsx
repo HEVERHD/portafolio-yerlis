@@ -1,54 +1,58 @@
-import { profile, hero } from "../data.js";
+import { profile } from "../content.js";
+import { useLang } from "../i18n.jsx";
 import { ArrowIcon, DownloadIcon } from "./icons.jsx";
 import TestRunner from "./TestRunner.jsx";
 import CountUp from "./CountUp.jsx";
 
 // Separa el título para marcar la palabra destacada con el subrayado de "error".
-function Title() {
-  const [before, after] = hero.title.split(hero.highlight);
+function Title({ title, highlight }) {
+  const [before, after] = title.split(highlight);
   return (
     <h1 className="hero-title">
       {before}
-      <span className="bug-word">{hero.highlight}</span>
+      <span className="bug-word">{highlight}</span>
       {after}
     </h1>
   );
 }
 
 export default function Hero() {
+  const { t } = useLang();
+  const h = t.hero;
+
   return (
     <section id="inicio" className="hero">
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow intro" style={{ "--d": 0 }}>
             <span className="status-dot" aria-hidden="true" />
-            {profile.role} · Disponible para nuevos retos
+            {profile.role} · {h.eyebrow}
           </p>
           <div className="intro" style={{ "--d": 1 }}>
-            <Title />
+            <Title title={h.title} highlight={h.highlight} />
           </div>
           <p className="lead intro" style={{ "--d": 2 }}>
-            {hero.intro}
+            {h.intro}
           </p>
 
           <div className="hero-actions intro" style={{ "--d": 3 }}>
             <a href="#proyectos" className="btn btn-primary">
-              Ver proyectos <ArrowIcon />
+              {h.primary} <ArrowIcon />
             </a>
             {profile.cv ? (
               <a href={profile.cv} className="btn btn-ghost" download>
-                <DownloadIcon /> Descargar CV
+                <DownloadIcon /> {h.cv}
               </a>
             ) : (
               <a href="#contacto" className="btn btn-ghost">
-                Hablemos
+                {h.secondary}
               </a>
             )}
           </div>
 
           <dl className="facts intro" style={{ "--d": 4 }}>
-            {hero.facts.map((f) => (
-              <div key={f.label}>
+            {h.facts.map((f, i) => (
+              <div key={i}>
                 <dt>
                   <CountUp value={f.value} />
                 </dt>
@@ -63,13 +67,13 @@ export default function Hero() {
             style={{ "--d": 5 }}
             onClick={() => window.dispatchEvent(new Event("open-console"))}
           >
-            <kbd>Ctrl</kbd> + <kbd>K</kbd> abre mi consola de QA. Prueba <code>run tests</code>
+            <kbd>Ctrl</kbd> + <kbd>K</kbd> {h.hint[0]} <code>{h.hint[1]}</code>
           </button>
         </div>
 
         <div className="hero-visual intro" style={{ "--d": 2 }}>
           <div className="portrait">
-            <img src={profile.photo} alt={`Retrato de ${profile.name}`} width="560" height="560" />
+            <img src={profile.photo} alt={profile.name} width="560" height="560" />
             <span className="scan" aria-hidden="true" />
           </div>
           <TestRunner />

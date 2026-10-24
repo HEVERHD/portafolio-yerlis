@@ -1,44 +1,44 @@
 import { useEffect, useRef, useState } from "react";
-import { profile, skills, projects, seeking } from "../data.js";
+import { profile, apiCases } from "../content.js";
+import { useLang } from "../i18n.jsx";
+import { toggleTheme } from "./Header.jsx";
 import { CloseIcon } from "./icons.jsx";
 
 // Consola "qa-cli": se abre con Ctrl/⌘ + K o con el botón >_ del header.
 // Solo imprime texto plano (React lo escapa), nunca HTML.
 
+// Acepta nombres en español y en inglés.
 const sections = {
   inicio: "inicio",
+  home: "inicio",
   sobre: "sobre-mi",
+  about: "sobre-mi",
   habilidades: "habilidades",
+  skills: "habilidades",
   proceso: "proceso",
+  process: "proceso",
+  demo: "demo",
   proyectos: "proyectos",
+  projects: "proyectos",
+  reto: "reto",
+  challenge: "reto",
+  calidad: "calidad",
+  quality: "calidad",
   trayectoria: "trayectoria",
+  journey: "trayectoria",
   contacto: "contacto",
+  contact: "contacto",
 };
+const sectionNames = (lang) =>
+  lang === "es"
+    ? ["inicio", "sobre", "habilidades", "proceso", "demo", "proyectos", "reto", "calidad", "trayectoria", "contacto"]
+    : ["home", "about", "skills", "process", "demo", "projects", "challenge", "quality", "journey", "contact"];
 
-const help = [
-  "Comandos disponibles:",
-  "  whoami              quién soy",
-  "  skills              habilidades por categoría",
-  "  projects            casos de estudio",
-  "  run tests           ejecuta la suite de QA",
-  "  goto <sección>      " + Object.keys(sections).join(" | "),
-  "  contact             cómo contactarme",
-  "  theme               cambia tema claro/oscuro",
-  "  clear · exit",
-];
-
-const suite = [
-  "test_login_valido",
-  "test_login_password_incorrecto",
-  "test_busqueda_de_rutas",
-  "test_api_crear_kit_201",
-  "test_api_kit_sin_nombre_400",
-  "test_regresion_pedido",
-];
-
-const commandNames = ["help", "whoami", "skills", "projects", "run tests", "goto", "contact", "theme", "clear", "exit", "sudo hire yerlis"];
+const commandNames = ["help", "whoami", "skills", "projects", "run tests", "goto", "contact", "theme", "lang", "clear", "exit", "sudo hire yerlis"];
 
 export default function Console() {
+  const { t, lang, toggleLang } = useLang();
+  const cli = t.cli;
   const [open, setOpen] = useState(false);
   const [lines, setLines] = useState([]);
   const [value, setValue] = useState("");
@@ -73,13 +73,13 @@ export default function Console() {
       if (lines.length === 0) {
         setLines([
           { t: "sys", s: `qa-cli v2.0 · ${profile.name}, ${profile.role}` },
-          { t: "sys", s: "Escribe «help» para ver los comandos. Tab autocompleta, ↑ ↓ recorren el historial." },
+          { t: "sys", s: cli.welcome },
         ]);
       }
       setTimeout(() => input.current?.focus(), 0);
     }
     if (!open && d.open) d.close();
-  }, [open, lines.length]);
+  }, [open, lines.length, cli.welcome]);
 
   useEffect(() => {
     out.current?.scrollTo({ top: out.current.scrollHeight });
@@ -89,19 +89,18 @@ export default function Console() {
 
   const print = (...items) => setLines((l) => [...l, ...items]);
 
+  // Nombres reales de github.com/Yerlis24/api_stand_tests.
   function runSuite() {
     setBusy(true);
-    print({ t: "dim", s: "collecting… 6 items" });
-    suite.forEach((name, i) => {
-      timers.current.push(
-        setTimeout(() => print({ t: "ok", s: `PASSED  ${name}` }), 320 * (i + 1))
-      );
+    print({ t: "dim", s: `collecting… ${apiCases.length} items` });
+    apiCases.forEach((c, i) => {
+      timers.current.push(setTimeout(() => print({ t: "ok", s: `PASSED  ${c.fn}` }), 220 * (i + 1)));
     });
     timers.current.push(
       setTimeout(() => {
-        print({ t: "ok-b", s: `══ ${suite.length} passed in 1.94s ══` });
+        print({ t: "ok-b", s: `══ ${apiCases.length} passed ══` });
         setBusy(false);
-      }, 320 * (suite.length + 1))
+      }, 220 * (apiCases.length + 1))
     );
   }
 
@@ -114,27 +113,29 @@ export default function Console() {
 
     switch (name) {
       case "help":
-        print(...help.map((s) => ({ t: "out", s })));
+        print(
+          ...cli.help.map((s) => ({
+            t: "out",
+            s: s.endsWith("      ") ? s + sectionNames(lang).join(" | ") : s,
+          }))
+        );
         break;
       case "whoami":
         print(
           { t: "out", s: `${profile.name} — ${profile.role}` },
-          { t: "out", s: profile.focus },
-          { t: "dim", s: `Busco: ${seeking}.` }
+          { t: "dim", s: `${cli.seeking}: ${t.contact.seeking}.` }
         );
         break;
       case "skills":
-        skills.forEach((g) => print({ t: "acc", s: g.title }, { t: "out", s: "  " + g.items.join(" · ") }));
+        t.skills.groups.forEach((g) => print({ t: "acc", s: g.title }, { t: "out", s: "  " + g.items.join(" · ") }));
         break;
       case "projects":
-        projects.forEach((p) =>
-          print({ t: "acc", s: `${p.title} — ${p.kind}` }, { t: "out", s: "  " + p.stack.join(" · ") })
-        );
-        print({ t: "dim", s: "Tip: goto proyectos para ver las demos en video." });
+        t.projects.items.forEach((p) => print({ t: "acc", s: `${p.title} — ${p.kind}` }, { t: "out", s: "  " + p.stack.join(" · ") }));
+        print({ t: "dim", s: cli.projectsTip });
         break;
       case "run":
         if (args[0] === "tests") runSuite();
-        else print({ t: "err", s: "¿Quisiste decir «run tests»?" });
+        else print({ t: "err", s: cli.runHint });
         break;
       case "test":
       case "pytest":
@@ -143,7 +144,7 @@ export default function Console() {
       case "goto": {
         const id = sections[args[0]];
         if (!id) {
-          print({ t: "err", s: `Sección desconocida. Opciones: ${Object.keys(sections).join(", ")}` });
+          print({ t: "err", s: `${cli.unknownSection} ${sectionNames(lang).join(", ")}` });
           break;
         }
         setOpen(false);
@@ -158,8 +159,12 @@ export default function Console() {
         );
         break;
       case "theme":
-        window.dispatchEvent(new Event("toggle-theme"));
-        print({ t: "dim", s: "Tema cambiado." });
+        toggleTheme();
+        print({ t: "dim", s: cli.themeDone });
+        break;
+      case "lang":
+        print({ t: "dim", s: cli.langDone });
+        toggleLang();
         break;
       case "clear":
         setLines([]);
@@ -169,14 +174,11 @@ export default function Console() {
         break;
       case "sudo":
         if (args.join(" ") === "hire yerlis") {
-          print(
-            { t: "ok-b", s: "[sudo] permiso concedido ✓" },
-            { t: "out", s: `Excelente decisión. Escríbeme a ${profile.email} y hablemos.` }
-          );
-        } else print({ t: "err", s: "Permiso denegado. Prueba «sudo hire yerlis»." });
+          print({ t: "ok-b", s: cli.sudoOk }, { t: "out", s: cli.sudoText(profile.email) });
+        } else print({ t: "err", s: cli.sudoNo });
         break;
       default:
-        print({ t: "err", s: `Comando no encontrado: ${name}. Escribe «help».` });
+        print({ t: "err", s: cli.notFound(name) });
     }
   }
 
@@ -204,7 +206,7 @@ export default function Console() {
       const v = value.toLowerCase();
       if (v.startsWith("goto ")) {
         const part = v.slice(5);
-        const m = Object.keys(sections).find((s) => s.startsWith(part));
+        const m = sectionNames(lang).find((s) => s.startsWith(part));
         if (m) setValue(`goto ${m}`);
       } else {
         const m = commandNames.find((c) => c.startsWith(v) && v);
@@ -217,7 +219,7 @@ export default function Console() {
     <dialog
       ref={dialog}
       className="console"
-      aria-label="Consola qa-cli"
+      aria-label="qa-cli"
       onClose={() => setOpen(false)}
       onClick={(e) => e.target === dialog.current && setOpen(false)}
     >
@@ -228,7 +230,7 @@ export default function Console() {
           <i />
         </span>
         <span>yerlis@qa-cli: ~</span>
-        <button type="button" className="icon-btn" onClick={() => setOpen(false)} aria-label="Cerrar consola">
+        <button type="button" className="icon-btn" onClick={() => setOpen(false)} aria-label={cli.close}>
           <CloseIcon />
         </button>
       </div>
@@ -249,13 +251,13 @@ export default function Console() {
             spellCheck="false"
             autoComplete="off"
             autoCapitalize="off"
-            aria-label="Comando"
+            aria-label={cli.input}
             placeholder={lines.length <= 2 ? "help" : ""}
           />
         </label>
       </div>
       <div className="console-hints">
-        {["help", "run tests", "skills", "sudo hire yerlis"].map((c) => (
+        {["help", "run tests", "skills", "lang", "sudo hire yerlis"].map((c) => (
           <button
             key={c}
             type="button"

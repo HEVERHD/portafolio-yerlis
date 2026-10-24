@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { profile } from "../data.js";
+import { profile } from "../content.js";
+import { useLang } from "../i18n.jsx";
 import { MenuIcon, CloseIcon, SunIcon, MoonIcon, TerminalIcon } from "./icons.jsx";
 
 const links = [
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#habilidades", label: "Habilidades" },
-  { href: "#proceso", label: "Proceso" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#trayectoria", label: "Trayectoria" },
+  { href: "#sobre-mi", key: "about" },
+  { href: "#habilidades", key: "skills" },
+  { href: "#proceso", key: "process" },
+  { href: "#proyectos", key: "projects" },
+  { href: "#reto", key: "challenge" },
 ];
 
 function currentTheme() {
@@ -16,7 +17,17 @@ function currentTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
+export function toggleTheme() {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try {
+    localStorage.setItem("theme", next);
+  } catch {}
+  window.dispatchEvent(new Event("themechange"));
+}
+
 export default function Header() {
+  const { t, toggleLang } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState(currentTheme);
@@ -48,19 +59,10 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const onToggle = () => toggleTheme();
-    window.addEventListener("toggle-theme", onToggle);
-    return () => window.removeEventListener("toggle-theme", onToggle);
+    const sync = () => setTheme(currentTheme());
+    window.addEventListener("themechange", sync);
+    return () => window.removeEventListener("themechange", sync);
   }, []);
-
-  function toggleTheme() {
-    const next = currentTheme() === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem("theme", next);
-    } catch {}
-    setTheme(next);
-  }
 
   return (
     <header className={`header${scrolled ? " is-scrolled" : ""}${open ? " is-open" : ""}`}>
@@ -79,19 +81,22 @@ export default function Header() {
                   aria-current={current === l.href ? "true" : undefined}
                   onClick={() => setOpen(false)}
                 >
-                  {l.label}
+                  {t.ui.nav[l.key]}
                 </a>
               </li>
             ))}
             <li className="nav-cta">
               <a href="#contacto" className="btn btn-primary btn-sm" onClick={() => setOpen(false)}>
-                Contactar
+                {t.ui.contact}
               </a>
             </li>
           </ul>
         </nav>
 
         <div className="header-actions">
+          <button type="button" className="icon-btn lang-btn" onClick={toggleLang} aria-label={t.ui.langSwitch} title={t.ui.langSwitch}>
+            {t.ui.langShort}
+          </button>
           <button
             type="button"
             className="icon-btn console-btn"
@@ -99,7 +104,7 @@ export default function Header() {
               setOpen(false);
               window.dispatchEvent(new Event("open-console"));
             }}
-            aria-label="Abrir consola qa-cli (Ctrl + K)"
+            aria-label={t.ui.console}
             title="qa-cli · Ctrl + K"
           >
             <TerminalIcon />
@@ -108,7 +113,7 @@ export default function Header() {
             type="button"
             className="icon-btn"
             onClick={toggleTheme}
-            aria-label={theme === "dark" ? "Cambiar a tema claro" : "Cambiar a tema oscuro"}
+            aria-label={theme === "dark" ? t.ui.themeLight : t.ui.themeDark}
           >
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
@@ -117,7 +122,7 @@ export default function Header() {
             className="icon-btn menu-btn"
             aria-expanded={open}
             aria-controls="menu"
-            aria-label={open ? "Cerrar menú" : "Abrir menú"}
+            aria-label={open ? t.ui.menuClose : t.ui.menuOpen}
             onClick={() => setOpen((o) => !o)}
           >
             {open ? <CloseIcon /> : <MenuIcon />}

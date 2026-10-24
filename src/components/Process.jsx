@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { process } from "../data.js";
+import { useLang } from "../i18n.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 import BugTicket from "./BugTicket.jsx";
 
 // El avance del pipeline sigue al scroll: cada paso se "enciende" cuando la
 // línea de lectura (55 % de la pantalla) lo alcanza.
 export default function Process() {
+  const { t } = useLang();
+  const process = t.process.steps;
   const list = useRef(null);
   const [p, setP] = useState(0);
 
@@ -40,15 +42,15 @@ export default function Process() {
   return (
     <section id="proceso" className="section">
       <div className="container">
-        <SectionHeading index="03" label="Proceso" title="Cómo trabajo, de requisito a release.">
-          Un ciclo de QA completo: así llega un defecto desde que lo detecto hasta que queda cerrado.
+        <SectionHeading index="03" label={t.process.label} title={t.process.title}>
+          {t.process.intro}
         </SectionHeading>
 
         <div className="process-grid">
           <ol className="pipeline" ref={list} style={{ "--p": p }}>
             {process.map((s, i) => (
               <li
-                key={s.title}
+                key={i}
                 className={i < active ? "is-done" : i === active ? "is-active" : undefined}
               >
                 <span className="node" aria-hidden="true">

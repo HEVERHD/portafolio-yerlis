@@ -1,17 +1,22 @@
-import { profile, seeking } from "../data.js";
+import { profile } from "../content.js";
+import { useLang } from "../i18n.jsx";
 import { MailIcon, LinkedInIcon, GitHubIcon } from "./icons.jsx";
 
 export default function Contact() {
+  const { t } = useLang();
+  const c = t.contact;
+
   return (
     <section id="contacto" className="section">
       <div className="container">
         <div className="contact" data-reveal>
           <p className="section-label">
-            <span>06</span> Contacto
+            <span>09</span> {c.label}
           </p>
-          <h2>¿Buscas a alguien que cuide la calidad de tu producto?</h2>
+          <h2>{c.title}</h2>
           <p className="contact-text">
-            Estoy abierta a oportunidades como <strong>{seeking}</strong>. Escríbeme y conversamos.
+            {c.textBefore} <strong>{c.seeking}</strong>
+            {c.textAfter}
           </p>
           <div className="contact-actions">
             <a href={`mailto:${profile.email}`} className="btn btn-primary">

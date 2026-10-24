@@ -1,12 +1,18 @@
-import { profile } from "../data.js";
+import { profile } from "../content.js";
+import { useLang } from "../i18n.jsx";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "./icons.jsx";
 
 export default function Footer() {
+  const { t } = useLang();
+
   return (
     <footer className="footer">
       <div className="container footer-inner">
         <p>
-          © {new Date().getFullYear()} {profile.name} · {profile.role}
+          © {new Date().getFullYear()} {profile.name} · {profile.role} ·{" "}
+          <a href="#calidad" className="footer-qa">
+            {t.ui.footer}
+          </a>
         </p>
         <ul className="footer-links">
           <li>
@@ -20,7 +26,7 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <a href={`mailto:${profile.email}`} aria-label="Correo electrónico">
+            <a href={`mailto:${profile.email}`} aria-label="Email">
               <MailIcon />
             </a>
           </li>

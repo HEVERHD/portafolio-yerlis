@@ -1,0 +1,56 @@
+{
+  "generatedAt": "2026-10-24T00:12:39.108Z",
+  "total": 31,
+  "passed": 31,
+  "failed": 0,
+  "durationMs": 25137,
+  "projects": [
+    "desktop-chromium",
+    "mobile-pixel-7"
+  ],
+  "a11yViolations": 0,
+  "suites": [
+    {
+      "title": "Accesibilidad (axe)",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "title": "Carga y contenido",
+      "tests": 10,
+      "passed": 10,
+      "failed": 0
+    },
+    {
+      "title": "Consola qa-cli",
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "title": "Demo de automatización",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "title": "Reto: encuentra el bug",
+      "tests": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "title": "Proyectos",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "title": "Navegación, idioma y tema",
+      "tests": 6,
+      "passed": 6,
+      "failed": 0
+    }
+  ]
+}
