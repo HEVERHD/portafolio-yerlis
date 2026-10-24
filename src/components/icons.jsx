@@ -81,6 +81,31 @@ export const TerminalIcon = (p) => (
   </svg>
 );
 
+export const PauseIcon = (p) => (
+  <svg {...base} fill="currentColor" stroke="none" {...p}>
+    <rect x="6.5" y="5" width="4" height="14" rx="1.2" />
+    <rect x="13.5" y="5" width="4" height="14" rx="1.2" />
+  </svg>
+);
+
+export const NextIcon = (p) => (
+  <svg {...base} {...p}>
+    <path d="m7 6 7 6-7 6M17 6v12" />
+  </svg>
+);
+
+export const ExpandIcon = (p) => (
+  <svg {...base} {...p}>
+    <path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" />
+  </svg>
+);
+
+export const CodeIcon = (p) => (
+  <svg {...base} {...p}>
+    <path d="m8 7-5 5 5 5M16 7l5 5-5 5" />
+  </svg>
+);
+
 export const DownloadIcon = (p) => (
   <svg {...base} {...p}>
     <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />

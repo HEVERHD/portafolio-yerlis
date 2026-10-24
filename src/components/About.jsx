@@ -1,21 +1,24 @@
-import { about } from "../data.js";
+import { useLang } from "../i18n.jsx";
 import SectionHeading from "./SectionHeading.jsx";
 
 export default function About() {
+  const { t } = useLang();
+  const a = t.about;
+
   return (
     <section id="sobre-mi" className="section">
       <div className="container">
-        <SectionHeading index="01" label="Sobre mí" title="Calidad como hábito, no como etapa final." />
+        <SectionHeading index="01" label={a.label} title={a.title} />
         <div className="about-grid">
           <div className="about-text" data-reveal>
-            {about.paragraphs.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
+            {a.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
             ))}
-            <blockquote>“{about.motto}”</blockquote>
+            <blockquote>“{a.motto}”</blockquote>
           </div>
           <ul className="strengths">
-            {about.strengths.map((s, i) => (
-              <li key={s.title} data-reveal data-spot style={{ "--d": i + 1 }}>
+            {a.strengths.map((s, i) => (
+              <li key={i} data-reveal data-spot style={{ "--d": i + 1 }}>
                 <h3>{s.title}</h3>
                 <p>{s.text}</p>
               </li>

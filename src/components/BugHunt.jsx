@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLang } from "../i18n.jsx";
 
 // Guiño de QA: un bug cruza la pantalla de vez en cuando; al atraparlo
 // aparece un pequeño "reporte". Se desactiva con movimiento reducido.
@@ -21,6 +22,7 @@ function BugSvg() {
 }
 
 export default function BugHunt() {
+  const { t } = useLang();
   const [run, setRun] = useState(0); // cambia la key para reiniciar la animación
   const [state, setState] = useState("hidden"); // hidden | walking | caught
   const [count, setCount] = useState(0);
@@ -54,7 +56,7 @@ export default function BugHunt() {
           type="button"
           className="bug"
           style={{ "--y": `${30 + ((run * 37) % 50)}vh` }}
-          aria-label="Atrapar el bug"
+          aria-label={t.bugHunt.catch}
           onClick={() => {
             setCount((c) => c + 1);
             setState("caught");
@@ -68,8 +70,7 @@ export default function BugHunt() {
         <div className="bug-toast" role="status">
           <span className="pill">fixed</span>
           <p>
-            <b>BUG-{String(count).padStart(3, "0")}</b> reportado y cerrado. Así trabajo: lo detecto antes que tus
-            usuarios.
+            <b>BUG-{String(count).padStart(3, "0")}</b> {t.bugHunt.toast}
           </p>
         </div>
       )}

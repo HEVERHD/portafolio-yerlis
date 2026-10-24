@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useLang } from "../i18n.jsx";
 import { CheckIcon } from "./icons.jsx";
 
-// Terminal decorativa que "ejecuta" una suite de pruebas en bucle.
+// Terminal decorativa que "ejecuta" en bucle tests reales de
+// github.com/Yerlis24/api_stand_tests (los tiempos son ilustrativos).
 const tests = [
-  { name: "test_login_valido", time: 0.42 },
-  { name: "test_busqueda_de_rutas", time: 0.87 },
-  { name: "test_api_crear_kit", time: 0.31 },
-  { name: "test_regresion_pedido", time: 1.12 },
+  { name: "test_create_user_2_letter_in_first_name", time: 0.42 },
+  { name: "test_create_user_16_letter_in_first_name", time: 0.38 },
+  { name: "test_create_user_has_number_in_first_name", time: 0.31 },
+  { name: "test_create_user_no_first_name", time: 0.29 },
 ];
 const total = tests.reduce((s, t) => s + t.time, 0).toFixed(2);
 
@@ -14,6 +16,7 @@ const STEP_MS = 650;
 const HOLD_STEPS = 6; // pasos que se queda el resultado antes de reiniciar
 
 export default function TestRunner() {
+  const { t } = useLang();
   const reduce =
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -40,24 +43,24 @@ export default function TestRunner() {
           <i />
           <i />
         </span>
-        <span>qa-suite</span>
+        <span>{t.runner.suite}</span>
         <span className={`pill${finished ? "" : " is-running"}`}>
-          {finished ? "pass" : "running"}
+          {finished ? t.runner.pass : t.runner.running}
         </span>
       </div>
       <p className="runner-cmd">
-        <span className="prompt">$</span> pytest tests/ -v
+        <span className="prompt">$</span> pytest create_user_test.py
       </p>
       <ul>
-        {tests.map((t, i) => {
+        {tests.map((x, i) => {
           const state = i < done ? "pass" : i === done && !finished ? "run" : "idle";
           return (
-            <li key={t.name} className={`is-${state}`}>
+            <li key={x.name} className={`is-${state}`}>
               <span className="mark">
                 {state === "pass" ? <CheckIcon width={14} height={14} /> : state === "run" ? <span className="spin" /> : null}
               </span>
-              <span className="tname">{t.name}</span>
-              <span className="ttime">{state === "pass" ? `${t.time.toFixed(2)}s` : ""}</span>
+              <span className="tname">{x.name}</span>
+              <span className="ttime">{state === "pass" ? `${x.time.toFixed(2)}s` : ""}</span>
             </li>
           );
         })}
