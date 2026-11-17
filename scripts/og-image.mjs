@@ -4,7 +4,7 @@
 import { chromium } from "@playwright/test";
 import { readFileSync } from "node:fs";
 
-const photo = readFileSync("public/img/yerlis.png").toString("base64");
+const photo = readFileSync("public/img/yerlis.jpg").toString("base64");
 
 const html = `<!doctype html>
 <html><head><meta charset="utf-8">
@@ -26,7 +26,7 @@ const html = `<!doctype html>
   .name { margin-top: 30px; font-size: 30px; color: #c4a3ef; }
   .cmd { margin-top: 26px; font-family: "JetBrains Mono", monospace; font-size: 22px; color: #9a94a8; }
   .cmd b { color: #4cc18c; font-weight: 500; }
-  .photo { position: relative; width: 330px; height: 330px; border-radius: 50%; overflow: hidden; background: #8848aa;
+  .photo { position: relative; width: 330px; height: 330px; border-radius: 50%; overflow: hidden; background: #e9e6ef;
            outline: 10px solid #1c1926; flex: none; }
   .photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); }
 </style></head>
@@ -37,7 +37,7 @@ const html = `<!doctype html>
     <p class="name">Yerlis Dimas</p>
     <p class="cmd">$ pytest · <b>10 passed</b></p>
   </div>
-  <div class="photo"><img src="data:image/png;base64,${photo}" alt=""></div>
+  <div class="photo"><img src="data:image/jpeg;base64,${photo}" alt=""></div>
 </body></html>`;
 
 const browser = await chromium.launch();

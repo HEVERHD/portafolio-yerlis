@@ -11,7 +11,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/yerlis-dimas-puello/",
   github: "https://github.com/Yerlis24",
   repo: "https://github.com/HEVERHD/portafolio-yerlis",
-  photo: `${base}img/yerlis.png`,
+  photo: `${base}img/yerlis.jpg`,
   // Cuando haya un CV en PDF, colócalo en /public y pon aquí su ruta,
   // p. ej. `${base}cv-yerlis-dimas.pdf`. Mientras sea null no se muestra el botón.
   cv: null,

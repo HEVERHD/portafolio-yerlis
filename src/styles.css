@@ -434,7 +434,7 @@ button {
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
-  background: #8848aa;
+  background: var(--bg-alt);
   box-shadow: var(--shadow-lg);
   outline: 10px solid var(--surface);
 }
