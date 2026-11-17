@@ -40,7 +40,7 @@ npm run test:report               # ejecuta la suite y actualiza src/qa-report.j
 
 Todos los textos, en español e inglés, están en [`src/content.js`](src/content.js).
 
-- **Foto:** `public/img/yerlis.png`.
+- **Foto:** `public/img/yerlis.jpg`.
 - **Proyectos:** imagen en `public/img/`, video y vista previa en `public/videos/` (H.264).
 - **CV:** coloca el PDF en `public/` y pon su ruta en `profile.cv`; el botón
   "Descargar CV" aparece solo cuando ese campo tiene valor.

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-24T00:12:39.108Z",
+  "generatedAt": "2026-11-17T14:21:57.748Z",
   "total": 31,
   "passed": 31,
   "failed": 0,
-  "durationMs": 25137,
+  "durationMs": 14029,
   "projects": [
     "desktop-chromium",
     "mobile-pixel-7"
