@@ -97,8 +97,29 @@ function CaseStudy({ project, labels, onClose, closeLabel }) {
           </div>
         )}
 
+        {s.checks && (
+          <>
+            <h3>{s.checksTitle}</h3>
+            <ul className="project-work is-static">
+              {s.checks.map((x, i) => (
+                <li key={i}>{x}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
         <h3>{s.approachTitle}</h3>
         <p>{s.approach}</p>
+        {project.impact && (
+          <dl className="impact">
+            {project.impact.map((m) => (
+              <div key={m.label}>
+                <dt>{m.value}</dt>
+                <dd>{m.label}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
 
         <ul className="tags">
           {project.stack.map((x) => (
@@ -149,6 +170,18 @@ function CodeThumb() {
 
 function Media({ p, t, onPlay }) {
   const vid = useRef(null);
+  // Proyecto real sin video: la imagen enlaza a la plataforma.
+  if (p.image && !p.video && p.link) {
+    return (
+      <a className="project-media" href={p.link} target="_blank" rel="noreferrer" aria-label={`${t.visit}: ${p.title}`}>
+        <img src={p.image} alt="" loading="lazy" />
+        <span className="inspect" aria-hidden="true" />
+        <span className="play">
+          <ArrowIcon /> {t.visit}
+        </span>
+      </a>
+    );
+  }
   if (!p.image) {
     return (
       <a className="project-media is-code" href={p.code} target="_blank" rel="noreferrer" aria-label={`${t.code}: ${p.title}`}>
@@ -206,9 +239,25 @@ export default function Projects() {
             <article key={p.id} className={`card project${i % 2 ? " is-flipped" : ""}`} data-reveal data-spot>
               <Media p={p} t={pr} onPlay={setPlaying} />
               <div className="project-body">
+                {p.badge && (
+                  <p className="project-badge">
+                    <span className="status-dot" aria-hidden="true" />
+                    {p.badge}
+                  </p>
+                )}
                 <p className="project-kind">{p.kind}</p>
                 <h3>{p.title}</h3>
                 <p className="project-summary">{p.summary}</p>
+                {p.impact && (
+                  <dl className="impact" aria-label={pr.impactLabel}>
+                    {p.impact.map((m) => (
+                      <div key={m.label}>
+                        <dt>{m.value}</dt>
+                        <dd>{m.label}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
                 <ul className="project-work">
                   {p.work.map((w, j) => (
                     <li key={j} style={{ "--j": j }}>
@@ -228,6 +277,11 @@ export default function Projects() {
                   {p.code && (
                     <a className="btn btn-ghost btn-sm" href={p.code} target="_blank" rel="noreferrer">
                       <GitHubIcon /> {pr.code}
+                    </a>
+                  )}
+                  {p.link && (
+                    <a className="btn btn-ghost btn-sm" href={p.link} target="_blank" rel="noreferrer">
+                      <ArrowIcon /> {pr.visit}
                     </a>
                   )}
                 </div>

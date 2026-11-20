@@ -1,6 +1,6 @@
 # Portafolio · Yerlis Dimas
 
-Sitio personal de Yerlis Dimas, QA Engineer (pruebas manuales, automatizadas y de API).
+Sitio personal de Yerlis Dimas, QA Engineer (pruebas manuales, funcionales y de API).
 
 Hecho con React 19 y Vite, sin librerías de UI ni de iconos. Es una sola página bilingüe
 (ES/EN), con tema claro/oscuro, y responsive. Incluye:
@@ -42,10 +42,14 @@ Todos los textos, en español e inglés, están en [`src/content.js`](src/conten
 
 - **Foto:** `public/img/yerlis.jpg`.
 - **Proyectos:** imagen en `public/img/`, video y vista previa en `public/videos/` (H.264).
-- **CV:** coloca el PDF en `public/` y pon su ruta en `profile.cv`; el botón
-  "Descargar CV" aparece solo cuando ese campo tiene valor.
-- **Certificaciones:** agrégalas en `certifications` (ES y EN); el bloque aparece solo
-  cuando la lista tiene elementos.
+- **CV en PDF:** se genera desde el mismo contenido con `npm run cv`
+  (`public/cv/Yerlis-Dimas-CV-ES.pdf` y `-EN.pdf`). Vuelve a ejecutarlo después de cambiar
+  textos, para que el CV y el sitio coincidan. Los textos propios del CV están en `cv`.
+- **Disponibilidad:** ubicación, modalidad e idiomas en `availability`.
+- **Certificaciones y recomendaciones:** agrégalas en `certifications` y `recommendations`
+  (ES y EN); cada bloque aparece solo cuando su lista tiene elementos.
+- **Dominio:** cuando el sitio esté publicado, pon su URL en `profile.siteUrl`; el QR del
+  "Resumen en 30 segundos" pasará a apuntar al portafolio en lugar de a LinkedIn.
 - **Imagen para redes:** `npm run og` regenera `public/og.png`. Cuando el sitio tenga
   dominio, pon la URL absoluta de la imagen en las etiquetas `og:image` de `index.html`.
 

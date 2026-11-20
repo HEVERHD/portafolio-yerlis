@@ -18,6 +18,20 @@ export default function Contact() {
             {c.textBefore} <strong>{c.seeking}</strong>
             {c.textAfter}
           </p>
+          <dl className="avail">
+            <div>
+              <dt>{t.availability.locationLabel}</dt>
+              <dd>{t.availability.location}</dd>
+            </div>
+            <div>
+              <dt>{t.availability.modesLabel}</dt>
+              <dd>{t.availability.modes.join(" · ")}</dd>
+            </div>
+            <div>
+              <dt>{t.availability.languagesLabel}</dt>
+              <dd>{t.availability.languages.join(" · ")}</dd>
+            </div>
+          </dl>
           <div className="contact-actions">
             <a href={`mailto:${profile.email}`} className="btn btn-primary">
               <MailIcon /> {profile.email}

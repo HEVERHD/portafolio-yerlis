@@ -945,3 +945,347 @@
     padding: 20px;
   }
 }
+
+/* ---------- Disponibilidad (contacto) ---------- */
+.avail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 28px;
+  margin: 22px auto 0;
+  max-width: 720px;
+}
+.avail div {
+  text-align: center;
+}
+.avail dt {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-text);
+}
+.avail dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---------- Lo que estoy aprendiendo / recomendaciones ---------- */
+.learning,
+.recs {
+  margin-top: 48px;
+  max-width: 820px;
+}
+.learning h3,
+.recs h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.learning-intro {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.learning ul,
+.recs ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.learning li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 20px;
+}
+.learning-status {
+  justify-self: start;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 50%, var(--line));
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--accent-text);
+}
+.learning-title {
+  font-weight: 600;
+  color: var(--ink);
+}
+.learning-text {
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.learning .cert-link {
+  margin: 4px 0 0;
+}
+.rec {
+  padding: 22px;
+}
+.rec blockquote {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.rec-name {
+  margin-top: 14px;
+  font-weight: 600;
+}
+.rec-name a {
+  color: var(--accent-text);
+}
+.rec-role {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* ---------- Resumen en 30 segundos ---------- */
+.summary-dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+.summary-dialog[open] {
+  animation: console-in 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.summary-dialog::backdrop {
+  background: rgb(12 10 16 / 0.55);
+  backdrop-filter: blur(3px);
+}
+.summary {
+  padding: 26px 28px 22px;
+}
+.summary-head {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 18px;
+  align-items: center;
+}
+.summary-head img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-alt);
+}
+.summary-kicker {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-text);
+}
+.summary-head h2 {
+  margin-top: 2px;
+  font-size: 26px;
+  font-weight: 600;
+}
+.summary-role {
+  color: var(--ink-2);
+}
+.summary-avail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 18px;
+}
+.summary-avail li {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 13px;
+  font-weight: 500;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 28px;
+  margin-top: 8px;
+}
+.summary h3 {
+  margin: 20px 0 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.summary-list,
+.summary-projects {
+  display: grid;
+  gap: 5px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.summary-list li::before {
+  content: "✓ ";
+  color: var(--ok);
+  font-weight: 700;
+}
+.summary-projects b {
+  color: var(--ink);
+  font-weight: 600;
+}
+.summary-side {
+  padding-top: 20px;
+}
+.qr {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.summary-qr {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+  text-align: center;
+}
+.summary-contact {
+  display: grid;
+  gap: 8px;
+  font-size: 13.5px;
+}
+.summary-contact li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.summary-contact svg {
+  flex: none;
+  color: var(--accent-text);
+}
+.summary-contact a {
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+.summary-contact a:hover {
+  color: var(--accent-text);
+}
+.summary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .summary {
+    padding: 20px;
+  }
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+  .summary-side {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 6px 16px;
+    align-items: start;
+  }
+  .summary-side .summary-qr {
+    grid-column: 1;
+  }
+  .summary-side h3,
+  .summary-side .summary-contact {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .summary-side h3 {
+    display: none;
+  }
+}
+
+/* Imprimir solo la tarjeta de resumen cuando está abierta. */
+@media print {
+  html.summary-open body * {
+    visibility: hidden;
+  }
+  html.summary-open .summary-dialog,
+  html.summary-open .summary-dialog * {
+    visibility: visible;
+  }
+  html.summary-open .summary-dialog {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    max-height: none;
+    border: 0;
+    box-shadow: none;
+    color: #000;
+    background: #fff;
+  }
+  html.summary-open .summary-dialog::backdrop {
+    background: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ---------- Proyecto real destacado ---------- */
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  margin-bottom: 12px;
+  padding: 4px 12px 4px 10px;
+  border-radius: 999px;
+  background: var(--ok-soft);
+  color: var(--ok);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.impact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 18px 0 4px;
+}
+.impact div {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.impact dt {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ok);
+}
+.impact dd {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.study-body .impact {
+  margin-top: 16px;
+}
+@media (max-width: 640px) {
+  .impact {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .impact div {
+    padding: 10px;
+  }
+  .impact dt {
+    font-size: 20px;
+  }
+}

@@ -1,6 +1,6 @@
 import { profile } from "../content.js";
 import { useLang } from "../i18n.jsx";
-import { ArrowIcon, DownloadIcon } from "./icons.jsx";
+import { ArrowIcon, DownloadIcon, BoltIcon } from "./icons.jsx";
 import TestRunner from "./TestRunner.jsx";
 import CountUp from "./CountUp.jsx";
 
@@ -39,15 +39,16 @@ export default function Hero() {
             <a href="#proyectos" className="btn btn-primary">
               {h.primary} <ArrowIcon />
             </a>
-            {profile.cv ? (
-              <a href={profile.cv} className="btn btn-ghost" download>
-                <DownloadIcon /> {h.cv}
-              </a>
-            ) : (
-              <a href="#contacto" className="btn btn-ghost">
-                {h.secondary}
-              </a>
-            )}
+            <a href={t.cvFile} className="btn btn-ghost" download>
+              <DownloadIcon /> {h.cv}
+            </a>
+            <button
+              type="button"
+              className="btn btn-ghost summary-btn"
+              onClick={() => window.dispatchEvent(new Event("open-summary"))}
+            >
+              <BoltIcon /> {t.summary.open}
+            </button>
           </div>
 
           <dl className="facts intro" style={{ "--d": 4 }}>

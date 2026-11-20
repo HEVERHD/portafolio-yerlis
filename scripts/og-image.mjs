@@ -32,7 +32,7 @@ const html = `<!doctype html>
 </style></head>
 <body>
   <div class="copy">
-    <span class="tag"><span class="dot"></span>QA Engineer · Manual & Automation</span>
+    <span class="tag"><span class="dot"></span>QA Engineer · Manual & API Testing</span>
     <h1>Encuentro los <u>errores</u> antes que tus usuarios.</h1>
     <p class="name">Yerlis Dimas</p>
     <p class="cmd">$ pytest · <b>10 passed</b></p>

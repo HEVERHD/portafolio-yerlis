@@ -1,20 +1,20 @@
 // Todo el contenido del sitio, en español (es) e inglés (en).
 // Para actualizar textos, proyectos o enlaces no hace falta tocar los componentes.
 
-const base = import.meta.env.BASE_URL;
+// Fuera de Vite (p. ej. en scripts/cv-pdf.mjs) no existe import.meta.env.
+const base = import.meta.env?.BASE_URL ?? "/";
 
 // Datos que no cambian con el idioma.
 export const profile = {
   name: "Yerlis Dimas",
   role: "QA Engineer",
-  email: "yerlisdimasqa@gmail.com",
+  email: "yerlismdimas@gmail.com",
   linkedin: "https://www.linkedin.com/in/yerlis-dimas-puello/",
   github: "https://github.com/Yerlis24",
   repo: "https://github.com/HEVERHD/portafolio-yerlis",
   photo: `${base}img/yerlis.jpg`,
-  // Cuando haya un CV en PDF, colócalo en /public y pon aquí su ruta,
-  // p. ej. `${base}cv-yerlis-dimas.pdf`. Mientras sea null no se muestra el botón.
-  cv: null,
+  // URL pública del portafolio. Mientras sea null, el QR del resumen apunta a LinkedIn.
+  siteUrl: null,
 };
 
 // Casos reales de github.com/Yerlis24/api_stand_tests (create_user_test.py).
@@ -84,14 +84,14 @@ const es = {
     title: "Encuentro los errores antes que tus usuarios.",
     highlight: "errores",
     intro:
-      "Soy QA Engineer con experiencia en pruebas manuales y automatizadas para aplicaciones web, móviles y APIs. Diseño casos de prueba, documento defectos con claridad y ayudo a que cada entrega salga con confianza.",
+      "Soy QA Engineer con experiencia en pruebas manuales, funcionales y de API para aplicaciones web y móviles. Diseño casos de prueba, documento defectos con claridad y ayudo a que cada entrega salga con confianza.",
     primary: "Ver proyectos",
     secondary: "Hablemos",
     cv: "Descargar CV",
     facts: [
-      { value: "9", label: "proyectos prácticos de QA" },
-      { value: "Web · Móvil · API", label: "plataformas validadas" },
-      { value: "Python + Selenium", label: "automatización E2E" },
+      { value: "~90%", label: "menos tiempo con RutaLista, en producción" },
+      { value: "10", label: "proyectos prácticos de QA" },
+      { value: "Postman", label: "pruebas de API REST" },
     ],
     hint: ["abre mi consola de QA. Prueba", "run tests"],
   },
@@ -99,9 +99,9 @@ const es = {
     label: "Sobre mí",
     title: "Calidad como hábito, no como etapa final.",
     paragraphs: [
-      "Me formé como QA Engineer en el programa intensivo de TripleTen, donde completé 9 proyectos prácticos aplicando pruebas funcionales, de regresión, automatizadas y de API sobre escenarios reales.",
+      "Me formé como QA Engineer en el programa intensivo de TripleTen, donde completé 10 proyectos prácticos aplicando pruebas funcionales, de regresión y de API sobre escenarios reales, además de mis primeras pruebas automatizadas.",
       "He trabajado con Selenium, Postman, SQL, Jira y Android Studio para validar aplicaciones web, móviles y servicios REST. Eso me ha permitido detectar defectos críticos de forma temprana y reducir los tiempos de validación.",
-      "Hoy me desempeño como Auxiliar Administrativa y Logística, un rol en el que aplico control de calidad en entregas, gestión de tiempos y cumplimiento de procesos: la misma disciplina que llevo al testing.",
+      "Hoy me desempeño como Supervisora Logística en Almaviva. Allí uní mis dos mundos: detecté que la asignación diaria de operarios en Excel tomaba más de 45 minutos, definí los requisitos de RutaLista y la probé antes de su lanzamiento. Hoy el equipo la usa a diario y asigna en unos 2 minutos.",
     ],
     strengths: [
       { title: "Capacidad analítica", text: "Descompongo un flujo en escenarios, bordes y casos negativos antes de ejecutar." },
@@ -113,11 +113,11 @@ const es = {
   skills: {
     label: "Habilidades",
     title: "Herramientas y técnicas con las que trabajo.",
-    intro: "Desde el diseño del caso de prueba hasta la automatización y el reporte del defecto.",
+    intro: "Desde el diseño del caso de prueba hasta la ejecución y el reporte del defecto.",
     groups: [
       { title: "Tipos de prueba", items: ["Funcionales", "Regresión", "Smoke", "Interfaz (UI)", "API REST", "Móviles (Android)", "Casos negativos", "Valores límite"] },
-      { title: "Automatización y código", items: ["Python", "pytest", "requests", "Selenium WebDriver", "Postman", "Newman", "SQL / MySQL", "JSON", "Git"] },
-      { title: "Gestión y documentación", items: ["Jira", "Casos de prueba", "Reporte de defectos", "Swagger / docs de API", "Metodologías ágiles"] },
+      { title: "Herramientas técnicas", items: ["Python", "pytest", "requests", "Selenium WebDriver", "Postman", "Newman", "SQL / MySQL", "JSON", "Git"] },
+      { title: "Gestión y documentación", items: ["Requisitos y criterios de aceptación", "Pruebas de aceptación (UAT)", "Jira", "Casos de prueba", "Reporte de defectos", "Swagger / docs de API", "Metodologías ágiles"] },
       { title: "Entorno de trabajo", items: ["Chrome DevTools", "Android Studio", "PyCharm", "VS Code", "GitHub", "Figma", "Slack"] },
     ],
   },
@@ -128,7 +128,7 @@ const es = {
     steps: [
       { tag: "análisis", title: "Analizar requisitos", text: "Entiendo el flujo, las reglas de negocio y los criterios de aceptación antes de probar nada." },
       { tag: "diseño", title: "Diseñar casos de prueba", text: "Escenarios positivos, negativos y de borde, priorizados por riesgo e impacto." },
-      { tag: "ejecución", title: "Ejecutar pruebas", text: "Funcionales, de API y de interfaz; manuales o automatizadas con Python." },
+      { tag: "ejecución", title: "Ejecutar pruebas", text: "Funcionales, de interfaz y de API, principalmente manuales y con Postman para los servicios REST." },
       { tag: "reporte", title: "Reportar defectos", text: "Bugs reproducibles en Jira: pasos, resultado esperado vs. actual, evidencia y severidad." },
       { tag: "verificación", title: "Verificar la corrección", text: "Confirmo que el fix resuelve el problema en el mismo entorno donde se detectó." },
       { tag: "regresión", title: "Regresión", text: "Vuelvo a correr la suite para asegurar que el cambio no rompió nada más." },
@@ -168,9 +168,9 @@ const es = {
   },
   demo: {
     label: "En acción",
-    title: "Automatización de pruebas de API, en vivo.",
+    title: "Mis primeras pruebas automatizadas de API.",
     intro:
-      "Una repetición de mi suite real en Python + pytest: cada test envía una petición al endpoint de creación de usuarios y valida la respuesta con análisis de valores límite.",
+      "Una repetición de una suite real que escribí en Python + pytest durante mi formación: cada test envía una petición al endpoint de creación de usuarios y valida la respuesta con análisis de valores límite. Es un área que sigo fortaleciendo.",
     source: "Código fuente en GitHub",
     play: "Reproducir",
     pause: "Pausar",
@@ -186,14 +186,60 @@ const es = {
   projects: {
     label: "Proyectos",
     title: "Casos de estudio de QA.",
-    intro: "Proyectos donde apliqué metodologías de testing, análisis funcional y aseguramiento de calidad.",
+    intro: "Un proyecto real en producción y los casos de estudio de mi formación, donde apliqué testing, análisis funcional y aseguramiento de calidad.",
     demo: "Ver demo",
     demoOf: (t) => `Ver demo en video de ${t}`,
     caseStudy: "Ver caso completo",
     code: "Ver código",
     more: "Más en GitHub",
     moreText: "Repositorios, colecciones y scripts de prueba.",
+    visit: "Ver plataforma",
+    impactLabel: "Impacto medido en la operación",
     items: [
+      {
+        id: "rutalista",
+        title: "RutaLista",
+        kind: "Proyecto real · Almaviva Colombia",
+        badge: "En producción · en uso diario",
+        inCvExperience: true, // en el CV ya aparece dentro de Experiencia
+        summary:
+          "Desde mi rol de supervisora detecté que la asignación diaria de operarios en Excel tomaba más de 45 minutos cada mañana y provocaba errores de zona. Planteé la solución, definí sus reglas y la probé antes de llevarla a producción.",
+        work: [
+          "Levanté los requisitos y las reglas de negocio: rutas, nivel piso/altura, tipo de carga y restricciones de zona.",
+          "Definí los criterios de aceptación y diseñé los casos de prueba de la asignación, el backlog y el reporte diario.",
+          "Ejecuté las pruebas funcionales y de aceptación con archivos del WMS antes del lanzamiento.",
+        ],
+        impact: [
+          { value: "~90%", label: "menos tiempo de asignación" },
+          { value: "0", label: "errores de restricción de zona" },
+          { value: "2 min", label: "del archivo a la asignación completa" },
+        ],
+        stack: ["Requisitos", "Reglas de negocio", "Criterios de aceptación", "Pruebas funcionales", "UAT"],
+        image: `${base}img/rutalista.jpg`,
+        link: "https://rutalista-production.up.railway.app/",
+        study: {
+          context:
+            "En el centro de distribución de Almaviva, cada mañana se calculaba en Excel cuántos operarios asignar por ruta, a qué pasillos iban y quién podía trabajar en altura. Tomaba más de 45 minutos, sin visibilidad del avance y con riesgo de asignar personas a zonas que no correspondían. RutaLista reemplazó ese proceso y hoy lo usa el equipo a diario.",
+          scopeTitle: "Mi rol: idea, requisitos y QA",
+          scope: [
+            "Identifiqué el problema desde la operación diaria como Supervisora Logística.",
+            "Definí las reglas que debía respetar el motor de asignación: rutas Bogotá y Nacional, horarios de corte, nivel piso/altura y zonas de carga pesada o sobredimensionada.",
+            "Escribí los criterios de aceptación de cada funcionalidad.",
+            "Probé la plataforma antes del lanzamiento y validé que el resultado coincidiera con el proceso real.",
+          ],
+          checksTitle: "Qué validé",
+          checks: [
+            "Carga del archivo exportado del WMS, sin pasos manuales.",
+            "Asignación que respeta siempre las restricciones de zona.",
+            "Detección automática del backlog pendiente del día anterior.",
+            "Avance por ruta según el estado de las líneas (pendiente, alistado, facturado).",
+            "Reporte diario en imagen, listo para compartir en un clic.",
+          ],
+          approachTitle: "Resultado",
+          approach:
+            "Una herramienta construida a partir del proceso real del equipo, que pasó de más de 45 minutos de trabajo manual a una asignación completa en unos 2 minutos.",
+        },
+      },
       {
         id: "urban-routes",
         title: "Urban Routes",
@@ -202,7 +248,7 @@ const es = {
           "Aseguramiento de calidad de una app tipo Uber: búsqueda de rutas, interacción con el mapa y flujo completo de solicitud de taxi.",
         work: [
           "Pruebas funcionales, de regresión y de interfaz sobre los flujos de usuario.",
-          "Automatización E2E del flujo de solicitud de taxi con Python y Selenium.",
+          "Práctica de automatización del flujo de solicitud de taxi con Python y Selenium.",
           "Documentación de casos de prueba, registro de bugs y reporte de resultados.",
         ],
         stack: ["Python", "Selenium", "Postman", "SQL"],
@@ -221,7 +267,7 @@ const es = {
           ],
           approachTitle: "Enfoque",
           approach:
-            "Combiné pruebas manuales exploratorias con automatización E2E en Python + Selenium para el flujo crítico de solicitud, documentando cada caso y cada defecto encontrado.",
+            "Me centré en pruebas manuales exploratorias y funcionales, documentando cada caso y cada defecto encontrado, y practiqué la automatización del flujo crítico con Python + Selenium.",
         },
       },
       {
@@ -252,7 +298,7 @@ const es = {
       {
         id: "api-stand",
         title: "API Stand · Creación de usuarios",
-        kind: "Automatización de pruebas de API",
+        kind: "Pruebas de API con Python",
         summary:
           "Suite en Python + pytest + requests que valida el endpoint POST /api/v1/users/ con análisis de valores límite sobre el campo firstName.",
         work: [
@@ -335,8 +381,8 @@ const es = {
     label: "Trayectoria",
     title: "Experiencia y formación.",
     items: [
-      { when: "Actualidad", title: "Auxiliar Administrativa y Logística", text: "Control de calidad en entregas, gestión de tiempos y cumplimiento de procesos." },
-      { when: "Formación", title: "QA Engineer · TripleTen", text: "Programa intensivo con 9 proyectos prácticos: pruebas funcionales, de regresión, automatizadas y de API." },
+      { when: "Actualidad", title: "Supervisora Logística · Almaviva", text: "Supervisión del control de calidad en entregas, la gestión de tiempos y el cumplimiento de procesos. Impulsé y validé RutaLista, la plataforma de alistamiento que hoy usa el equipo." },
+      { when: "Formación", title: "QA Engineer · TripleTen", text: "Programa intensivo con 10 proyectos prácticos: pruebas funcionales, de regresión, automatizadas y de API." },
     ],
     certTitle: "Certificaciones",
     verify: "Verificar",
@@ -345,11 +391,92 @@ const es = {
   // { name: "QA Engineer", issuer: "TripleTen", year: "2025", url: "https://..." }
   // Mientras la lista esté vacía, el bloque no se muestra.
   certifications: [],
+  availability: {
+    title: "Disponibilidad",
+    locationLabel: "Ubicación",
+    location: "Colombia · GMT-5",
+    modesLabel: "Modalidad",
+    modes: ["Remoto", "Híbrido", "Presencial"],
+    languagesLabel: "Idiomas",
+    languages: ["Español (nativo)", "Inglés (básico, A1–A2)"],
+  },
+  learning: {
+    title: "Lo que estoy aprendiendo",
+    intro: "Las áreas en las que sigo creciendo.",
+    items: [
+      {
+        title: "Automatización de pruebas con Python + Selenium",
+        status: "En práctica",
+        text: "Mi siguiente paso: llevar a código los flujos que hoy pruebo de forma manual.",
+        link: { label: "Mis primeras pruebas automatizadas", url: "https://github.com/Yerlis24/api_stand_tests" },
+      },
+      {
+        title: "Análisis de datos de calidad",
+        status: "Reforzando",
+        text: "SQL y métricas de defectos para priorizar por impacto.",
+      },
+    ],
+  },
+  // Recomendaciones reales de LinkedIn, p. ej.:
+  // { name: "Nombre Apellido", role: "QA Lead · Empresa", text: "…", url: "https://www.linkedin.com/in/..." }
+  // Mientras la lista esté vacía, el bloque no se muestra.
+  recommendations: [],
+  recTitle: "Recomendaciones",
+  cvFile: `${base}cv/Yerlis-Dimas-CV-ES.pdf`,
+  summary: {
+    open: "Resumen en 30 segundos",
+    title: "Resumen en 30 segundos",
+    strengthsLabel: "Fortalezas",
+    strengths: [
+      "Llevó RutaLista a producción en Almaviva: ~90 % menos tiempo de asignación",
+      "Requisitos, criterios de aceptación y pruebas UAT",
+      "Pruebas manuales, funcionales y de API con Postman",
+    ],
+    toolsLabel: "Herramientas",
+    tools: ["Postman", "Jira", "SQL", "Chrome DevTools", "Android Studio", "Python (básico)"],
+    projectsLabel: "Proyectos",
+    contactLabel: "Contacto",
+    qrSite: "Escanea para ver el portafolio",
+    qrLinkedin: "Escanea para ver mi LinkedIn",
+    cv: "Descargar CV (PDF)",
+    print: "Imprimir",
+  },
+  // Textos del CV en PDF (scripts/cv-pdf.mjs). Pensado para filtros ATS:
+  // una columna, encabezados estándar y texto real (sin imágenes).
+  cv: {
+    profileTitle: "Perfil",
+    profile:
+      "QA Engineer con formación intensiva en TripleTen (10 proyectos prácticos) y experiencia en pruebas manuales, funcionales, de regresión y de API. Llevé a producción RutaLista, una plataforma que hoy usa mi equipo en Almaviva, desde los requisitos hasta las pruebas de aceptación. Diseño casos de prueba, documento defectos reproducibles y fortalezco la automatización con Python.",
+    experienceTitle: "Experiencia",
+    experience: [
+      {
+        title: "Supervisora Logística — Almaviva Colombia",
+        when: "Actualidad",
+        bullets: [
+          "Impulsé RutaLista, plataforma que reemplazó la asignación diaria de operarios en Excel: definí requisitos, reglas de negocio y criterios de aceptación, y ejecuté las pruebas funcionales y de aceptación antes del lanzamiento.",
+          "Resultado medido en la operación: ~90 % menos tiempo de asignación (de más de 45 min a unos 2 min) y 0 errores de restricción de zona. En uso diario por el equipo.",
+          "Supervisión del control de calidad en las entregas, la gestión de tiempos y el cumplimiento de procesos.",
+        ],
+      },
+    ],
+    educationTitle: "Formación",
+    education: [
+      {
+        title: "QA Engineer — TripleTen",
+        text: "Programa intensivo con 10 proyectos prácticos: pruebas funcionales, de regresión, de API y primeras pruebas automatizadas.",
+      },
+    ],
+    projectsTitle: "Proyectos",
+    skillsTitle: "Habilidades",
+    languagesTitle: "Idiomas",
+    availabilityTitle: "Disponibilidad",
+    portfolio: "Portafolio",
+  },
   contact: {
     label: "Contacto",
     title: "¿Buscas a alguien que cuide la calidad de tu producto?",
     textBefore: "Estoy abierta a oportunidades como",
-    seeking: "QA Engineer, Tester Junior o Analista QA (manual y automatizado)",
+    seeking: "QA Engineer, Tester Junior o Analista QA",
     textAfter: ". Escríbeme y conversamos.",
   },
   bugHunt: {
@@ -421,14 +548,14 @@ const en = {
     title: "I find the bugs before your users do.",
     highlight: "bugs",
     intro:
-      "I'm a QA Engineer with hands-on experience in manual and automated testing for web, mobile and API products. I design test cases, document defects clearly and help every release ship with confidence.",
+      "I'm a QA Engineer with hands-on experience in manual, functional and API testing for web and mobile products. I design test cases, document defects clearly and help every release ship with confidence.",
     primary: "See projects",
     secondary: "Let's talk",
     cv: "Download CV",
     facts: [
-      { value: "9", label: "hands-on QA projects" },
-      { value: "Web · Mobile · API", label: "platforms tested" },
-      { value: "Python + Selenium", label: "E2E automation" },
+      { value: "~90%", label: "less time with RutaLista, in production" },
+      { value: "10", label: "hands-on QA projects" },
+      { value: "Postman", label: "REST API testing" },
     ],
     hint: ["opens my QA console. Try", "run tests"],
   },
@@ -436,9 +563,9 @@ const en = {
     label: "About",
     title: "Quality as a habit, not a final step.",
     paragraphs: [
-      "I trained as a QA Engineer in TripleTen's intensive program, completing 9 hands-on projects with functional, regression, automated and API testing on real-world scenarios.",
+      "I trained as a QA Engineer in TripleTen's intensive program, completing 10 hands-on projects with functional, regression and API testing on real-world scenarios, plus my first automated tests.",
       "I've worked with Selenium, Postman, SQL, Jira and Android Studio to validate web apps, mobile apps and REST services, catching critical defects early and shortening validation time.",
-      "Today I work as an Administrative and Logistics Assistant, where I apply quality control to deliveries, time management and process compliance: the same discipline I bring to testing.",
+      "Today I work as a Logistics Supervisor at Almaviva, where my two worlds met: I noticed that assigning operators in Excel took over 45 minutes a day, defined the requirements for RutaLista and tested it before launch. The team now uses it daily and assigns in about 2 minutes.",
     ],
     strengths: [
       { title: "Analytical thinking", text: "I break a flow into scenarios, edge cases and negative paths before running anything." },
@@ -450,11 +577,11 @@ const en = {
   skills: {
     label: "Skills",
     title: "Tools and techniques I work with.",
-    intro: "From designing the test case to automating it and reporting the defect.",
+    intro: "From designing the test case to running it and reporting the defect.",
     groups: [
       { title: "Testing types", items: ["Functional", "Regression", "Smoke", "UI", "REST API", "Mobile (Android)", "Negative testing", "Boundary values"] },
-      { title: "Automation & code", items: ["Python", "pytest", "requests", "Selenium WebDriver", "Postman", "Newman", "SQL / MySQL", "JSON", "Git"] },
-      { title: "Management & docs", items: ["Jira", "Test cases", "Defect reporting", "Swagger / API docs", "Agile"] },
+      { title: "Technical tools", items: ["Python", "pytest", "requests", "Selenium WebDriver", "Postman", "Newman", "SQL / MySQL", "JSON", "Git"] },
+      { title: "Management & docs", items: ["Requirements & acceptance criteria", "User acceptance testing (UAT)", "Jira", "Test cases", "Defect reporting", "Swagger / API docs", "Agile"] },
       { title: "Workspace", items: ["Chrome DevTools", "Android Studio", "PyCharm", "VS Code", "GitHub", "Figma", "Slack"] },
     ],
   },
@@ -465,7 +592,7 @@ const en = {
     steps: [
       { tag: "analysis", title: "Analyze requirements", text: "I understand the flow, business rules and acceptance criteria before testing anything." },
       { tag: "design", title: "Design test cases", text: "Positive, negative and edge scenarios, prioritized by risk and impact." },
-      { tag: "execution", title: "Run the tests", text: "Functional, API and UI testing; manual or automated with Python." },
+      { tag: "execution", title: "Run the tests", text: "Functional, UI and API testing, mostly manual, with Postman for REST services." },
       { tag: "report", title: "Report defects", text: "Reproducible bugs in Jira: steps, expected vs. actual, evidence and severity." },
       { tag: "verification", title: "Verify the fix", text: "I confirm the fix solves the issue in the same environment where it was found." },
       { tag: "regression", title: "Regression", text: "I re-run the suite to make sure the change didn't break anything else." },
@@ -503,9 +630,9 @@ const en = {
   },
   demo: {
     label: "In action",
-    title: "API test automation, live.",
+    title: "My first automated API tests.",
     intro:
-      "A replay of my real Python + pytest suite: each test sends a request to the user-creation endpoint and checks the response using boundary value analysis.",
+      "A replay of a real Python + pytest suite I wrote during my training: each test sends a request to the user-creation endpoint and checks the response using boundary value analysis. It's an area I keep strengthening.",
     source: "Source code on GitHub",
     play: "Play",
     pause: "Pause",
@@ -521,14 +648,60 @@ const en = {
   projects: {
     label: "Projects",
     title: "QA case studies.",
-    intro: "Projects where I applied testing methodologies, functional analysis and quality assurance.",
+    intro: "A real project in production plus case studies from my training, applying testing, functional analysis and quality assurance.",
     demo: "Watch demo",
     demoOf: (t) => `Watch the ${t} video demo`,
     caseStudy: "Full case study",
     code: "View code",
     more: "More on GitHub",
     moreText: "Repositories, collections and test scripts.",
+    visit: "Visit platform",
+    impactLabel: "Impact measured in operations",
     items: [
+      {
+        id: "rutalista",
+        title: "RutaLista",
+        kind: "Real-world project · Almaviva Colombia",
+        badge: "In production · used daily",
+        inCvExperience: true,
+        summary:
+          "As a supervisor, I noticed that assigning warehouse operators in Excel took over 45 minutes every morning and led to zone errors. I proposed the solution, defined its rules and tested it before it went to production.",
+        work: [
+          "Gathered requirements and business rules: routes, floor/height level, load type and zone restrictions.",
+          "Defined acceptance criteria and designed test cases for assignment, backlog and the daily report.",
+          "Ran functional and acceptance testing with WMS export files before launch.",
+        ],
+        impact: [
+          { value: "~90%", label: "less assignment time" },
+          { value: "0", label: "zone restriction errors" },
+          { value: "2 min", label: "from file to full assignment" },
+        ],
+        stack: ["Requirements", "Business rules", "Acceptance criteria", "Functional testing", "UAT"],
+        image: `${base}img/rutalista.jpg`,
+        link: "https://rutalista-production.up.railway.app/",
+        study: {
+          context:
+            "At Almaviva's distribution center, every morning someone worked out in Excel how many operators each route needed, which aisles they'd cover and who could work at height. It took over 45 minutes, with no visibility of progress and a risk of assigning people to the wrong zones. RutaLista replaced that process and the team uses it every day.",
+          scopeTitle: "My role: idea, requirements and QA",
+          scope: [
+            "Identified the problem from day-to-day operations as Logistics Supervisor.",
+            "Defined the rules the assignment engine had to follow: Bogotá and national routes, cut-off times, floor/height level and heavy or oversized load zones.",
+            "Wrote the acceptance criteria for each feature.",
+            "Tested the platform before launch and checked the output matched the real process.",
+          ],
+          checksTitle: "What I validated",
+          checks: [
+            "Loading the WMS export file with no manual steps.",
+            "Assignments that always respect zone restrictions.",
+            "Automatic detection of the previous day's backlog.",
+            "Per-route progress based on line status (pending, picked, invoiced).",
+            "A one-click daily report image, ready to share.",
+          ],
+          approachTitle: "Outcome",
+          approach:
+            "A tool built from the team's real process, going from 45+ minutes of manual work to a full assignment in about 2 minutes.",
+        },
+      },
       {
         id: "urban-routes",
         title: "Urban Routes",
@@ -537,7 +710,7 @@ const en = {
           "Quality assurance for an Uber-like app: route search, map interaction and the full taxi request flow.",
         work: [
           "Functional, regression and UI testing across the user flows.",
-          "E2E automation of the taxi request flow with Python and Selenium.",
+          "Automation practice on the taxi request flow with Python and Selenium.",
           "Test case documentation, bug logging and results reporting.",
         ],
         stack: ["Python", "Selenium", "Postman", "SQL"],
@@ -556,7 +729,7 @@ const en = {
           ],
           approachTitle: "Approach",
           approach:
-            "I combined exploratory manual testing with Python + Selenium E2E automation for the critical request flow, documenting every case and every defect found.",
+            "I focused on exploratory and functional manual testing, documenting every case and every defect found, and practiced automating the critical flow with Python + Selenium.",
         },
       },
       {
@@ -587,7 +760,7 @@ const en = {
       {
         id: "api-stand",
         title: "API Stand · User creation",
-        kind: "API test automation",
+        kind: "API testing with Python",
         summary:
           "A Python + pytest + requests suite that validates the POST /api/v1/users/ endpoint using boundary value analysis on the firstName field.",
         work: [
@@ -670,18 +843,94 @@ const en = {
     label: "Journey",
     title: "Experience and education.",
     items: [
-      { when: "Current", title: "Administrative & Logistics Assistant", text: "Quality control in deliveries, time management and process compliance." },
-      { when: "Education", title: "QA Engineer · TripleTen", text: "Intensive program with 9 hands-on projects: functional, regression, automated and API testing." },
+      { when: "Current", title: "Logistics Supervisor · Almaviva", text: "Oversight of quality control in deliveries, time management and process compliance. Drove and validated RutaLista, the picking platform the team now uses." },
+      { when: "Education", title: "QA Engineer · TripleTen", text: "Intensive program with 10 hands-on projects: functional, regression, automated and API testing." },
     ],
     certTitle: "Certifications",
     verify: "Verify",
   },
   certifications: [],
+  availability: {
+    title: "Availability",
+    locationLabel: "Location",
+    location: "Colombia · GMT-5",
+    modesLabel: "Work mode",
+    modes: ["Remote", "Hybrid", "On-site"],
+    languagesLabel: "Languages",
+    languages: ["Spanish (native)", "English (basic, A1–A2)"],
+  },
+  learning: {
+    title: "What I'm learning",
+    intro: "The areas where I keep growing.",
+    items: [
+      {
+        title: "Test automation with Python + Selenium",
+        status: "Practicing",
+        text: "My next step: turning the flows I test manually today into code.",
+        link: { label: "My first automated tests", url: "https://github.com/Yerlis24/api_stand_tests" },
+      },
+      {
+        title: "Quality data analysis",
+        status: "Strengthening",
+        text: "SQL and defect metrics to prioritize by impact.",
+      },
+    ],
+  },
+  recommendations: [],
+  recTitle: "Recommendations",
+  cvFile: `${base}cv/Yerlis-Dimas-CV-EN.pdf`,
+  summary: {
+    open: "30-second summary",
+    title: "30-second summary",
+    strengthsLabel: "Strengths",
+    strengths: [
+      "Took RutaLista to production at Almaviva: ~90% less assignment time",
+      "Requirements, acceptance criteria and UAT",
+      "Manual, functional and API testing with Postman",
+    ],
+    toolsLabel: "Tools",
+    tools: ["Postman", "Jira", "SQL", "Chrome DevTools", "Android Studio", "Python (basic)"],
+    projectsLabel: "Projects",
+    contactLabel: "Contact",
+    qrSite: "Scan to open the portfolio",
+    qrLinkedin: "Scan to open my LinkedIn",
+    cv: "Download CV (PDF)",
+    print: "Print",
+  },
+  cv: {
+    profileTitle: "Profile",
+    profile:
+      "QA Engineer trained in TripleTen's intensive program (10 hands-on projects) with experience in manual, functional, regression and API testing. I took RutaLista to production, a platform my team at Almaviva now uses daily, from requirements to acceptance testing. I design test cases, document reproducible defects and am strengthening my automation skills with Python.",
+    experienceTitle: "Experience",
+    experience: [
+      {
+        title: "Logistics Supervisor — Almaviva Colombia",
+        when: "Current",
+        bullets: [
+          "Drove RutaLista, a platform that replaced the daily Excel-based operator assignment: defined requirements, business rules and acceptance criteria, and ran functional and acceptance testing before launch.",
+          "Measured outcome: ~90% less assignment time (from 45+ min to about 2 min) and zero zone restriction errors. Used daily by the team.",
+          "Oversight of quality control in deliveries, time management and process compliance.",
+        ],
+      },
+    ],
+    educationTitle: "Education",
+    education: [
+      {
+        title: "QA Engineer — TripleTen",
+        text: "Intensive program with 10 hands-on projects: functional, regression and API testing, plus first automated tests.",
+      },
+    ],
+    projectsTitle: "Projects",
+    skillsTitle: "Skills",
+    languagesTitle: "Languages",
+    availabilityTitle: "Availability",
+    portfolio: "Portfolio",
+  },
   contact: {
     label: "Contact",
     title: "Looking for someone to look after your product's quality?",
     textBefore: "I'm open to roles as",
-    seeking: "QA Engineer, Junior Tester or QA Analyst (manual and automated)",
+    seeking: "QA Engineer, Junior Tester or QA Analyst",
     textAfter: ". Drop me a line and let's talk.",
   },
   bugHunt: {
