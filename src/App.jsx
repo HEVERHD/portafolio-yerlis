@@ -13,6 +13,7 @@ import Footer from "./components/Footer.jsx";
 import BugHunt from "./components/BugHunt.jsx";
 import Console from "./components/Console.jsx";
 import Boot from "./components/Boot.jsx";
+import Summary from "./components/Summary.jsx";
 import useReveal from "./useReveal.js";
 import useSpotlight from "./useSpotlight.js";
 import { useLang } from "./i18n.jsx";
@@ -44,6 +45,7 @@ export default function App() {
       <Footer />
       <BugHunt />
       <Console />
+      <Summary />
     </>
   );
 }

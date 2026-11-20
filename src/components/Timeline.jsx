@@ -48,6 +48,48 @@ export default function Timeline() {
             </ul>
           </div>
         )}
+
+        <div className="learning" data-reveal>
+          <h3>{t.learning.title}</h3>
+          <p className="learning-intro">{t.learning.intro}</p>
+          <ul>
+            {t.learning.items.map((x, i) => (
+              <li key={i} className="card" data-spot>
+                <span className="learning-status">{x.status}</span>
+                <p className="learning-title">{x.title}</p>
+                <p className="learning-text">{x.text}</p>
+                {x.link && (
+                  <a href={x.link.url} target="_blank" rel="noreferrer" className="cert-link">
+                    {x.link.label} <ArrowIcon />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {t.recommendations.length > 0 && (
+          <div className="recs" data-reveal>
+            <h3>{t.recTitle}</h3>
+            <ul>
+              {t.recommendations.map((r) => (
+                <li key={r.name} className="card rec" data-spot>
+                  <blockquote>“{r.text}”</blockquote>
+                  <p className="rec-name">
+                    {r.url ? (
+                      <a href={r.url} target="_blank" rel="noreferrer">
+                        {r.name}
+                      </a>
+                    ) : (
+                      r.name
+                    )}
+                  </p>
+                  <p className="rec-role">{r.role}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   );
